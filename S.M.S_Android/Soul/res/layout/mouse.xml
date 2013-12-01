@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+     <TextView
+	android:id="@+id/result_mouse_gesture"  
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	android:textSize="16sp"
+	android:text="제스처 정보"
+	/>
+
+     <Button
+         android:id="@+id/lclick"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:onClick="onClick"
+         android:text="lclick" />
+
+     <Button
+         android:id="@+id/rclick"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:onClick="onClick"
+         android:text="rclick" />
+
+     <Button
+         android:id="@+id/drag"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:onClick="onClick"
+         android:text="drag" />
+
+</LinearLayout>
