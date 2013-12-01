@@ -42,7 +42,7 @@ namespace soul.com
                 
                 if ((readData != string.Empty))
                 {
-                    Manage(readData);                    
+                    Manage(readData);     
                 }
             }
             catch (TimeoutException)

@@ -12,14 +12,6 @@ namespace soul.uti
         private System.Windows.Window window;
         public Tray()
         {
-            //this.components = new System.ComponentModel.Container();
-            //this.contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] { this.menuItem1 });
-
-            // Initialize menuItem1 
-            //this.menuItem1.Index = 0;
-            //this.menuItem1.Text = "E&xit";
-            //this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
-
             this.notify = new System.Windows.Forms.NotifyIcon();
             notify.Icon = soul.Properties.Resources.trayicon;
         }

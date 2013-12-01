@@ -35,11 +35,14 @@ namespace soul
             InitializeComponent();            
         }
 
+        /// <summary>
+        /// 윈도우 로드시 초기화
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            BluetoothService.InitSerialPort("COM6");
-
-            //BluetoothService.InitSerialPort(ports[ports.Length-1]);
+            BluetoothService.InitSerialPort("COM6");            
             BluetoothService.Start();
 
             this.Hide();
@@ -54,7 +57,6 @@ namespace soul
         /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
             if (System.Windows.MessageBox.Show("종료 하시겠습니까?", "알림", MessageBoxButton.YesNo) == MessageBoxResult.No)
             {                
                 e.Cancel = true;                
@@ -66,6 +68,11 @@ namespace soul
             string[] ports = SerialPort.GetPortNames(); 
         }
 
+        /// <summary>
+        /// 윈도우 종료시 자원 해제
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closed(object sender, EventArgs e)
         {
             tray.trayDispose();
