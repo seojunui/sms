@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 	private BluetoothAdapter mBluetoothAdapter = null;
 	
 	
-	
+	//dfgxcfgcfgdcfgfcfcg
     public static final int MESSAGE_STATE_CHANGE = 1;
     public static final int MESSAGE_READ = 2;
     public static final int MESSAGE_WRITE = 3;
