@@ -10,16 +10,18 @@ namespace soul.com
     class Bluetooth : DataManager
     {
         SerialPort serial;
-        string g_sRecvData = String.Empty;       
+        string g_sRecvData = String.Empty;
+
+        uti.KeyboardControl kbc = new uti.KeyboardControl();
 
         public Bluetooth()
         {
-            serial = new SerialPort();            
+            serial = new SerialPort();
+            //DataC = new DataManager();
         }
         
         public void InitSerialPort(string PortName)
         {
-            //string[] ports = SerialPort.GetPortNames(); 
             Console.WriteLine("open");
             serial.PortName = PortName;
             serial.BaudRate = 115200;
@@ -27,7 +29,7 @@ namespace soul.com
             serial.Parity = Parity.None;
             serial.StopBits = StopBits.One;
             serial.ReadTimeout = 10000;
-            serial.WriteTimeout = 10000;            
+            serial.WriteTimeout = 10000;           
         }
         public void Start(){
             serial.Open();
@@ -39,10 +41,13 @@ namespace soul.com
             try
             {
                 string readData = serial.ReadExisting();
+
                 
                 if ((readData != string.Empty))
                 {
-                    Manage(readData);                    
+                    SetData(readData);
+                    //DataC.SetData(readData);  
+                    kbc.Start();
                 }
             }
             catch (TimeoutException)
@@ -51,11 +56,7 @@ namespace soul.com
             }
         }
 
-        public void Close()
-        {
-            if (this.serial.IsOpen)
-                this.serial.Close();
-        }
+
 
     }
 }
