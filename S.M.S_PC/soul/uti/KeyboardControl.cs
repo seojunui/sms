@@ -25,7 +25,6 @@ namespace soul.uti
 
         public KeyboardControl()
         {
-
         }
 
         [DllImport("user32.dll")]
@@ -53,7 +52,6 @@ namespace soul.uti
                             keybd_event(keypacket["CapsLock"], 0, 0, 0);
                             keybd_event(keypacket["CapsLock"], 0, 0x0002, 0);
                         }
-
                         keybd_event(arr_byteStr[0], 0, 0, 0);
                         keybd_event(arr_byteStr[0], 0, 0x0002, 0);
                     }

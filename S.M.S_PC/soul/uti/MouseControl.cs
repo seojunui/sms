@@ -74,13 +74,11 @@ namespace soul.uti
                 switch (MPoint)
                 {
                     case "lc":
-                        mouse_event(MOUSEEVENTF_LEFTDOWN, nowMp.x, nowMp.y, 0, 0);
-                        //Thread.Sleep(30);
+                        mouse_event(MOUSEEVENTF_LEFTDOWN, nowMp.x, nowMp.y, 0, 0);                        
                         mouse_event(MOUSEEVENTF_LEFTUP, nowMp.x, nowMp.y, 0, 0);
                         break;
                     case "rc":
-                        mouse_event(MOUSEEVENTF_RIGHTDOWN, nowMp.x, nowMp.y, 0, 0);
-                        //Thread.Sleep(30);
+                        mouse_event(MOUSEEVENTF_RIGHTDOWN, nowMp.x, nowMp.y, 0, 0);                        
                         mouse_event(MOUSEEVENTF_RIGHTUP, nowMp.x, nowMp.y, 0, 0);
                         break;
                     case "drag":

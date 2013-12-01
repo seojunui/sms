@@ -27,7 +27,6 @@ namespace soul.data
                     mc.Click(divideData[1]);
                     break;
                 default:
-
                     break;
             }
         }

@@ -44,8 +44,7 @@ namespace soul
 
             this.Hide();
             tray.setWindow(this);
-            tray.Start();
-            
+            tray.Start();            
         }
 
         /// <summary>
@@ -57,10 +56,8 @@ namespace soul
         {
 
             if (System.Windows.MessageBox.Show("종료 하시겠습니까?", "알림", MessageBoxButton.YesNo) == MessageBoxResult.No)
-            {
-                
-                e.Cancel = true;
-                
+            {                
+                e.Cancel = true;                
             }
         }
 
