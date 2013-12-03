@@ -21,16 +21,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	TextView stateOfLock;
-	View forKeyboard, forMouse;
-	boolean switchmode = true;
-	Button getBtn;
+	private TextView stateOfLock;
+	private View forKeyboard, forMouse;
+	private boolean switchmode = true; //true is Unlock
+	private boolean KorEngSwitch=false; //true = kor, false = eng
+	private Button getBtn;
 	
 	public static BluetoothService Bs = null;
 	private BluetoothAdapter mBluetoothAdapter = null;
 	
 	
-	//dfgxcfgcfgdcfgfcfcg
+	// Message types sent from the BluetoothChatService Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
     public static final int MESSAGE_READ = 2;
     public static final int MESSAGE_WRITE = 3;
@@ -49,13 +50,15 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		forKeyboard = findViewById(R.layout.keyboard);
-		forMouse = findViewById(R.layout.mouse);
+		forKeyboard = findViewById(R.id.keyboardInFramelayout);
+		forMouse = findViewById(R.id.mouseInFramelayout);
 		
 		stateOfLock = (TextView)findViewById(R.id.lockStateText);
 				
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		context = getApplicationContext();
+		
+		forMouse.setVisibility(View.INVISIBLE);
 	}
 		
 	public void sendMessage(String message) {
@@ -80,32 +83,15 @@ public class MainActivity extends Activity {
 	private String readData = null;
 	
 	private String[] changeKeyArr ={
-			"q",
-			"w",
-			"e",
-			"r",
-			"t",
-			"y",
-			"u",
-			"i",
-			"o",
-			"p",
-			"a",
-			"s",
-			"d",
-			"f",
-			"g",
-			"h",
-			"j",
-			"k",
-			"l",
-			"z",
-			"x",
-			"c",
-			"v",
-			"b",
-			"n",
-			"m",			
+			"q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+			"a", "s", "d", "f", "g", "h", "j", "k", "l", 
+			"z", "x", "c", "v", "b", "n", "m",
+	};
+	
+	private String[] changeKorKeyArr ={
+			"ㅂ", "ㅈ", "ㄷ", "ㄱ", "ㅅ", "ㅛ", "ㅕ", "ㅑ", "ㅐ", "ㅔ",
+			"ㅁ", "ㄴ", "ㅇ", "ㄹ", "ㅎ", "ㅗ", "ㅓ", "ㅏ", "ㅣ",
+			"ㅋ", "ㅌ", "ㅊ", "ㅍ", "ㅠ", "ㅜ", "ㅡ",		
 	};
 	
 	private void transbtn(){
@@ -131,22 +117,73 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+	
+	private void transKorbtn()
+	{
+		if(!KorEngSwitch)
+		{
+			hanChange(changeKorKeyArr);			
+			KorEngSwitch = true;
+		}else{
+			hanChange(changeKeyArr);
+			KorEngSwitch = false;
+		}		}
+	
+	private void hanChange(String[] changearr){
+		for(int i = 0 ; i < changearr.length; i++){
+			idvalue = context.getResources().getIdentifier( changeKeyArr[i], "id", this.getPackageName() );
+			changebtn = (Button)findViewById(idvalue);
+			
+			changebtn.setText(changearr[i]);
+		}
+	}
+	
 	public void onClick(View v) {		
-		/*Button getBtn = null;
-		kResult = (TextView) findViewById(R.id.result_keyboard);*/
 		Intent it = null;
 		getBtn = (Button) findViewById(v.getId());
 		switch (v.getId()) {
-		case R.id.to_mouse:
-			it = new Intent(this , mouseActivity.class);
-			startActivity(it);
+		
+		case R.id.change_lock:
+			if(switchmode == true)
+			{
+				switchmode = false;
+				stateOfLock.setText("LOCk");
+			}
+			else
+			{
+				switchmode = true;		
+				stateOfLock.setText("UNLOCk");
+			}
 			break;
+			
+		case R.id.to_keyboard:
+			if(switchmode == true)
+				changePage(1);
+			break;
+			
+		case R.id.to_mouse:
+			if(switchmode == true)
+				changePage(2);
+			break;
+			
 		case R.id.capslock:
-			transbtn();
+			if(!KorEngSwitch) //한글일때는 caps lock 무의미
+			{
+				transbtn();
+				
+				readData = getBtn.getText().toString();			
+				sendMessage(readData);
+			}
+			break;
+			
+		case R.id.kor_eng:
+			transKorbtn();
 			
 			readData = getBtn.getText().toString();			
-			sendMessage(readData);
+			//sendMessage(readData);
+			sendMessage("kor");
 			break;
+			
 		default:
 			readData = getBtn.getText().toString();			
 			sendMessage(readData);
@@ -154,6 +191,8 @@ public class MainActivity extends Activity {
 		}
 
 	}
+	
+	
 	
 	/*
 	public void onClick(View v) {

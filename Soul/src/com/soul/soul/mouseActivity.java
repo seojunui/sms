@@ -16,7 +16,6 @@ public class mouseActivity extends Activity {
 	TextView mResult;
 	GestureDetector mDetector;
 
-	coordinateCalculation cc;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mouse);
@@ -37,7 +36,6 @@ public class mouseActivity extends Activity {
             return;
         }
 
-        
         // Check that there's actually something to send
         if (message.length() > 0) {
             // Get the message bytes and tell the BluetoothChatService to write        	
@@ -49,7 +47,6 @@ public class mouseActivity extends Activity {
 		
 
 		public boolean onDown(MotionEvent e) {
-			
 			//BackUp_y = 0;
 			AppendText(String.format("%d, %d", (int)e.getX(), (int)e.getY()));
 			return false;
@@ -57,9 +54,13 @@ public class mouseActivity extends Activity {
 
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,	
 				float velocityY) {
-			/*AppendText(String.format("Fling : (%d,%d)-(%d,%d) (%d,%d)", 
-					(int)e1.getX(), (int)e1.getY(), (int)e2.getX(), (int)e2.getY(), 
-					(int)velocityX, (int)velocityY));*/
+			 /* AppendText(String.format("Fling : (%d,%d)-(%d,%d) (%d,%d)",
+			 * (int)e1.getX(), (int)e1.getY(), (int)e2.getX(), (int)e2.getY(),
+			 * (int)velocityX, (int)velocityY));
+			 */
+			AppendText(String.format("Fling : (%d,%d)-(%d,%d) (%d,%d)",
+					(int) e1.getX(), (int) e1.getY(), (int) e2.getX(),
+					(int) e2.getY(), (int) velocityX, (int) velocityY));
 			
 			
 			return false;
