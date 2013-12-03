@@ -13,7 +13,7 @@ namespace soul.uti
         private Dictionary<string, byte> keypacket = new Dictionary<string, byte>()
         {
             {"Backspace",0X8},{"Tab",0X9},{"Enter",0X0D},{"Shift",0X10},{"Ctrl",0X11},
-            {"Alt",0X12},{"pause",0X13},{"한/영",0X15},{"한자",0X19},{"Esc",0X1B},{"space",0X20},{"PgUp",0X21},
+            {"Alt",0X12},{"pause",0X13},{"kor",0X15},{"chn",0X19},{"Esc",0X1B},{"space",0X20},{"PgUp",0X21},
             {"PgDn",0X22},{"End",0X23},{"Home",0X24},{"left",0X25},{"up",0X26},{"right",0X27},{"down",0X28},{"Prt SC",0X2C},
             {"Insert",0X2D},{"delete",0X2E},{"0",0X30},{"1",0X31},{"2",0X32},{"3",0X33},{"4",0X34},{"5",0X35},{"6",0X36},
             {"7",0X37},{"8",0X38},{"9",0X39},{"a",0X41},{"b",0X42},{"c",0X43},{"d",0X44},{"e",0X45},{"f",0X46},{"g",0X47},

@@ -29,7 +29,10 @@ namespace soul
     {        
         uti.Tray tray = new uti.Tray();
         com.Bluetooth BluetoothService = new com.Bluetooth();
-        
+
+        private BackgroundWorker thread = new BackgroundWorker();
+
+
         public MainWindow()
         {
             InitializeComponent();            
@@ -47,8 +50,82 @@ namespace soul
 
             this.Hide();
             tray.setWindow(this);
-            tray.Start();            
+            tray.Start();
+
+            
+            // 진행률 전송 여부
+            thread.WorkerReportsProgress = true;
+            // 작업 취소 여부
+            thread.WorkerSupportsCancellation = true;
+            // 작업 쓰레드 
+            thread.DoWork += new DoWorkEventHandler(thread_DoWork);
+            // 진행률 변경
+            thread.ProgressChanged += new ProgressChangedEventHandler(thread_ProgressChanged);
+            // 작업 완료
+            thread.RunWorkerCompleted += new RunWorkerCompletedEventHandler(thread_RunWorkerCompleted);
         }
+
+
+
+        void thread_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            /*
+            //btnStart.Content = "Start";
+            string result = "작업이 완료되었습니다.";
+
+            // 작업이 취소된 경우
+            if (e.Cancelled)
+            {
+                result = "작업이 취소되었습니다.";
+            }
+
+            MessageBox.Show(result);
+            */
+        }
+
+        void thread_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            /*
+            int value = e.ProgressPercentage;
+
+            // 변경 값으로 갱신
+            progress.Value = value;
+            progressValue.Text = value.ToString() + "%";
+             */ 
+        }
+
+        void thread_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+
+
+            /*
+            for (int i = 0; i <= max; i++)
+            {
+                // CancelAsync() 메서드가 호출되었다면 정지
+                if (worker.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                else
+                {
+                    System.Threading.Thread.Sleep(50);
+
+                    // UI 쓰레드에 접근
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate()
+                    {
+                        ellipseGrid.Children.Add(RandomEllipse());
+                    });
+
+                    // 진행률 변경 값 전송
+                    worker.ReportProgress(i);
+                }
+            }*/
+        }
+
+
 
         /// <summary>
         /// 종료시 팝업창 활성화
