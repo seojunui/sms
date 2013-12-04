@@ -76,7 +76,7 @@ public class mouseActivity extends Activity {
 			//int now_y = (int) e2.getY() - (int) e1.getY();
 
 			
-			AppendText(String.format("m\\%d,%d", (int)distanceX, (int)distanceY ));
+			//AppendText(String.format("m\\%d,%d", (int)distanceX, (int)distanceY ));
 			sendMessage(String.format("m\\%d\n%d", -(int)distanceX , -(int)distanceY  ));
 
 			return false;

@@ -7,6 +7,11 @@ namespace soul.data
 {
     class DataManager
     {
+        private Dictionary<string, byte> keypacket = new Dictionary<string, byte>()
+        {
+            {",",0xBC} ,{"`",0xC0},{"/",0xBF},{"[",0xDB},{"]",0xDD},{";",0xBA},{"'",0xDE},{"window",0X5C},{"=",187}            
+        };
+
         uti.KeyboardControl kbc = new uti.KeyboardControl();
         uti.MouseControl mc = new uti.MouseControl();
 
@@ -25,6 +30,9 @@ namespace soul.data
                     break;
                 case "c":   //클릭 이벤트 실행
                     mc.Click(divideData[1]);
+                    break;
+                case "k2":
+                    kbc.Start(divideData[1], keypacket);
                     break;
                 default:
                     break;

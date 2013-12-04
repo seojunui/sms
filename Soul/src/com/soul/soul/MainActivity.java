@@ -26,7 +26,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity{
+public class MainActivity extends Activity {
 	private TextView stateOfLock;
 	private View forKeyboard, forMouse;
 	private boolean switchmode = true; // true is Unlock
@@ -48,8 +48,8 @@ public class MainActivity extends Activity{
 
 	private Button changebtn;
 	private int idvalue;
-	
-	ArrayList<String> arGesture = new ArrayList<String>(); 
+
+	ArrayList<String> arGesture = new ArrayList<String>();
 	TextView mResult;
 	GestureDetector mDetector;
 
@@ -70,96 +70,89 @@ public class MainActivity extends Activity{
 
 		forMouse.setVisibility(View.INVISIBLE);
 		stateOfLock.setText("UNLOCK");
-		
-		mResult = (TextView)findViewById(R.id.result_mouse_gesture);
+
+		mResult = (TextView) findViewById(R.id.result_mouse_gesture);
 		mDetector = new GestureDetector(this, mGestureListener);
 		mDetector.setOnDoubleTapListener(mDoubleTapListener);
-		
-		
-	}
-	
-	public boolean onTouchEvent(MotionEvent event) { 
-		return mDetector.onTouchEvent(event); 
-	}
-	/*
-	public void sendMessage(String message) {
-        // Check that we're actually connected before trying anything
-        if (MainActivity.Bs.getState() != MainActivity.Bs.STATE_CONNECTED) {        	
-            Toast.makeText(this, "non Connected", Toast.LENGTH_SHORT).show();        	
-            return;
-        }
 
-        // Check that there's actually something to send
-        if (message.length() > 0) {
-            // Get the message bytes and tell the BluetoothChatService to write        	
-            byte[] send = message.getBytes();           
-            MainActivity.Bs.write(send);
-        }
-    }*/
+	}
+
+	public boolean onTouchEvent(MotionEvent event) {
+		return mDetector.onTouchEvent(event);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if(this.Bs != null){
+			this.Bs.stop();
+		}
+	};
+	/*
+	 * public void sendMessage(String message) { // Check that we're actually
+	 * connected before trying anything if (MainActivity.Bs.getState() !=
+	 * MainActivity.Bs.STATE_CONNECTED) { Toast.makeText(this, "non Connected",
+	 * Toast.LENGTH_SHORT).show(); return; }
+	 * 
+	 * // Check that there's actually something to send if (message.length() >
+	 * 0) { // Get the message bytes and tell the BluetoothChatService to write
+	 * byte[] send = message.getBytes(); MainActivity.Bs.write(send); } }
+	 */
 	OnGestureListener mGestureListener = new OnGestureListener() {
-		
 
 		public boolean onDown(MotionEvent e) {
-			//BackUp_y = 0;
-			AppendText(String.format("%d, %d", (int)e.getX(), (int)e.getY()));
+			// BackUp_y = 0;
 			return false;
 		}
 
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,	
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 				float velocityY) {
-			 /* AppendText(String.format("Fling : (%d,%d)-(%d,%d) (%d,%d)",
+			/*
+			 * AppendText(String.format("Fling : (%d,%d)-(%d,%d) (%d,%d)",
 			 * (int)e1.getX(), (int)e1.getY(), (int)e2.getX(), (int)e2.getY(),
 			 * (int)velocityX, (int)velocityY));
 			 */
-			AppendText(String.format("Fling : (%d,%d)-(%d,%d) (%d,%d)",
-					(int) e1.getX(), (int) e1.getY(), (int) e2.getX(),
-					(int) e2.getY(), (int) velocityX, (int) velocityY));
-			
-			
+
 			return false;
 		}
 
 		public void onLongPress(MotionEvent e) {
-	//		AppendText("LongPress");
+			// AppendText("LongPress");
 		}
 
 		public boolean onScroll(MotionEvent e1, MotionEvent e2,
-				float distanceX, float distanceY) {		
-			//int now_x = (int) e2.getX() - (int) e1.getX();
-			//int now_y = (int) e2.getY() - (int) e1.getY();
-
-			
-			AppendText(String.format("m\\%d,%d", (int)distanceX, (int)distanceY ));
-			sendMessage(String.format("m\\%d\n%d", -(int)distanceX , -(int)distanceY  ));
+				float distanceX, float distanceY) {
+			// int now_x = (int) e2.getX() - (int) e1.getX();
+			// int now_y = (int) e2.getY() - (int) e1.getY();
+			sendMessage(String.format("m\\%d\n%d", -(int) distanceX,
+					-(int) distanceY));
 
 			return false;
 		}
-		
-		
 
 		public void onShowPress(MotionEvent e) {
-	//		AppendText("ShowPress");
+			// AppendText("ShowPress");
 		}
 
 		public boolean onSingleTapUp(MotionEvent e) {
-//			AppendText("SingleTapUp");
+			// AppendText("SingleTapUp");
 			return false;
 		}
 	};
 
 	OnDoubleTapListener mDoubleTapListener = new OnDoubleTapListener() {
 		public boolean onDoubleTap(MotionEvent e) {
-	//		AppendText("DoubleTap");
+			// AppendText("DoubleTap");
 			return false;
 		}
 
 		public boolean onDoubleTapEvent(MotionEvent e) {
-//			AppendText("DoubleTapEvent");
+			// AppendText("DoubleTapEvent");
 			return false;
 		}
 
 		public boolean onSingleTapConfirmed(MotionEvent e) {
-//			AppendText("SingleTapConfirmed");
+			// AppendText("SingleTapConfirmed");
 			return false;
 		}
 	};
@@ -176,7 +169,7 @@ public class MainActivity extends Activity{
 		}
 		mResult.setText(result.toString());
 	}
-
+	
 	public void sendMessage(String message) {
 		// Check that we're actually connected before trying anything
 		if (MainActivity.Bs.getState() != MainActivity.Bs.STATE_CONNECTED) {
@@ -187,10 +180,9 @@ public class MainActivity extends Activity{
 		// Check that there's actually something to send
 		if (message.length() > 0) {
 			// Get the message bytes and tell the BluetoothChatService to write
-			String divideStr = "k\\";
-			divideStr += message;
-			byte[] send = divideStr.getBytes();
-			Log.d("send", "" + divideStr + "::::" + send.toString());
+			
+			byte[] send = message.getBytes();
+			//Log.d("send", "" + divideStr + "::::" + send.toString());
 			MainActivity.Bs.write(send);
 		}
 	}
@@ -204,8 +196,20 @@ public class MainActivity extends Activity{
 	private String[] changeKorKeyArr = { "げ", "じ", "ぇ", "ぁ", "さ", "に", "づ",
 			"ち", "だ", "つ", "け", "い", "し", "ぉ", "ぞ", "で", "っ", "た", "び", "せ",
 			"ぜ", "ず", "そ", "ば", "ぬ", "ぱ", };
+	private String[] specialChar = {
+			",",
+			"`",
+			"/",
+			";",
+			"[",
+			"]",
+			"'",
+			"=",
+			"window",
+	};
 
 	private void transbtn() {
+		
 		for (int i = 0; i < changeKeyArr.length; i++) {
 			idvalue = context.getResources().getIdentifier(changeKeyArr[i],
 					"id", this.getPackageName());
@@ -250,8 +254,14 @@ public class MainActivity extends Activity{
 
 	public void onClick(View v) {
 		Intent it = null;
+		Intent serverIntent = null;
 		getBtn = (Button) findViewById(v.getId());
 		switch (v.getId()) {
+
+		case R.id.blutooth_connect_btn:
+			serverIntent = new Intent(this, DeviceListActivity.class);
+			startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
+			break;
 
 		case R.id.change_lock:
 			if (switchmode == true) {
@@ -279,18 +289,18 @@ public class MainActivity extends Activity{
 				transbtn();
 
 				readData = getBtn.getText().toString();
+				String divideStr = "k\\";
+				divideStr += readData;
 				sendMessage(readData);
 			}
 			break;
 
 		case R.id.kor_eng:
 			transKorbtn();
-
 			readData = getBtn.getText().toString();
 			// sendMessage(readData);
-			sendMessage("kor");
+			sendMessage("k\\kor");
 			break;
-			
 		case R.id.lclick:
 			String lclick = "c\\lc";
 			sendMessage(lclick);
@@ -304,30 +314,56 @@ public class MainActivity extends Activity{
 			String drag = "c\\drag";
 			sendMessage(drag);
 			break;
-
+		case R.id.right:
+			sendMessage("k\\right");
+			break;
+		case R.id.left:
+			sendMessage("k\\left");
+			break;
+		case R.id.up:
+			sendMessage("k\\up");
+			break;
+		case R.id.down:
+			sendMessage("k\\down");
+			break;
+		case R.id.windows:
+			sendMessage("k2\\window");
+			break;		
+		case R.id.space:
+			sendMessage("k\\space");
+			break;
+		case R.id.back:
+			sendMessage("k\\Backspace");
+			break;
 		default:
 			readData = getBtn.getText().toString();
-			sendMessage(readData);
+			if(KorEngSwitch){
+				for(int i = 0 ; i < changeKorKeyArr.length; i++){
+					if(changeKorKeyArr[i].equals(readData)){
+						readData = changeKeyArr[i];
+						break;
+					}
+				}
+			}
+			
+			
+			String divideStr = "k\\";			
+			
+			for(int i = 0; i<specialChar.length; i++)
+			{
+				if(specialChar[i].equals(readData))
+				{
+					divideStr = "k2\\";
+					break;
+				}
+			}
+			
+			divideStr += readData;
+			sendMessage(divideStr);
 			break;
 		}
 
 	}
-
-	/*
-	 * public void onClick(View v) {
-	 * 
-	 * switch(v.getId()) { case R.id.change_lock: if(switchmode == true) {
-	 * switchmode = false; stateOfLock.setText("LOCk"); } else { switchmode =
-	 * true; stateOfLock.setText("UNLOCk"); } break;
-	 * 
-	 * case R.id.to_keyboard: if(switchmode == false) { changePage(1); } break;
-	 * 
-	 * case R.id.to_mouse: if(switchmode == false) { changePage(2); } break;
-	 * 
-	 * }
-	 * 
-	 * }
-	 */
 
 	private void changePage(int page) {
 		forKeyboard.setVisibility(View.INVISIBLE);
@@ -371,7 +407,6 @@ public class MainActivity extends Activity{
 		}
 	}
 
-	// /2
 
 	private void connectDevice(Intent data, boolean secure) {
 		// Get the device MAC address

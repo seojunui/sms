@@ -45,9 +45,9 @@ namespace soul
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            BluetoothService.InitSerialPort("COM10");            
+            BluetoothService.InitSerialPort("COM11");            
             BluetoothService.Start();
-
+            
             this.Hide();
             tray.setWindow(this);
             tray.Start();
@@ -69,6 +69,7 @@ namespace soul
 
         void thread_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            
             /*
             //btnStart.Content = "Start";
             string result = "작업이 완료되었습니다.";

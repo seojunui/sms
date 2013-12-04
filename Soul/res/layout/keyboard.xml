@@ -609,7 +609,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onClick"
-                    android:text="\" />
+                    android:text="\\" />
 
                 <Button
                     android:id="@+id/back"
