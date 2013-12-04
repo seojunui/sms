@@ -44,7 +44,7 @@ public final class R {
         public static final int delete=0x7f080018;
         public static final int dot=0x7f080077;
         public static final int down=0x7f080011;
-        public static final int drag=0x7f080088;
+        public static final int drag=0x7f080087;
         public static final int e=0x7f080052;
         public static final int end=0x7f080019;
         public static final int enter=0x7f08006b;
@@ -76,6 +76,7 @@ public final class R {
         public static final int i=0x7f080057;
         public static final int insert=0x7f080015;
         public static final int item1=0x7f08008c;
+        public static final int item2=0x7f08008d;
         public static final int j=0x7f080066;
         public static final int k=0x7f080067;
         public static final int key=0x7f08002e;
@@ -83,7 +84,7 @@ public final class R {
         public static final int keybord_layout=0x7f08002d;
         public static final int kor_eng=0x7f080080;
         public static final int l=0x7f080068;
-        public static final int lclick=0x7f080086;
+        public static final int lclick=0x7f080085;
         public static final int left=0x7f080010;
         public static final int lockStateText=0x7f080000;
         public static final int m=0x7f080075;
@@ -131,8 +132,8 @@ public final class R {
         public static final int q=0x7f080050;
         public static final int quomark=0x7f08006a;
         public static final int r=0x7f080053;
-        public static final int rclick=0x7f080087;
-        public static final int result_mouse_gesture=0x7f080085;
+        public static final int rclick=0x7f080086;
+        public static final int result_mouse_gesture=0x7f080088;
         public static final int right=0x7f080012;
         public static final int right_num=0x7f08001b;
         public static final int s=0x7f080061;

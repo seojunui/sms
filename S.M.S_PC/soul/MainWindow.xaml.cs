@@ -45,7 +45,7 @@ namespace soul
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            BluetoothService.InitSerialPort("COM6");            
+            BluetoothService.InitSerialPort("COM10");            
             BluetoothService.Start();
 
             this.Hide();
