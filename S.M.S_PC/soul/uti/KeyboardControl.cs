@@ -37,6 +37,12 @@ namespace soul.uti
                 //Console.WriteLine(keyValue); 
                 if (keypacket.ContainsKey(keyValue))
                 {
+                    if (!System.Windows.Forms.Control.IsKeyLocked(System.Windows.Forms.Keys.CapsLock))
+                    {
+                        keybd_event(keypacket["CapsLock"], 0, 0, 0);
+                        keybd_event(keypacket["CapsLock"], 0, 0x0002, 0);
+                    }
+
                     keybd_event(keypacket[keyValue], 0, 0, 0);
                     keybd_event(keypacket[keyValue], 0, 0x0002, 0);
                 }
@@ -52,6 +58,7 @@ namespace soul.uti
                             keybd_event(keypacket["CapsLock"], 0, 0, 0);
                             keybd_event(keypacket["CapsLock"], 0, 0x0002, 0);
                         }
+
                         keybd_event(arr_byteStr[0], 0, 0, 0);
                         keybd_event(arr_byteStr[0], 0, 0x0002, 0);
                     }
